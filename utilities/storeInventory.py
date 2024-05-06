@@ -111,3 +111,33 @@ def delete_inventory_table():
     except Exception as e:
         print(f"Error: Unable to delete inventory table. Error message: {str(e)}")
 
+def get_inventory_table_count():
+    try:
+        table_client = get_table_client()
+        entities = table_client.list_entities()
+        row_count = sum(1 for _ in entities)
+        return row_count
+    except Exception as e:
+        print(f"Error: Unable to get inventory table count. Error message: {str(e)}")
+        return None
+    
+def get_inventory_entities_by_page(page_size, page_number):
+    try:
+        table_client = get_table_client()
+        entities = table_client.list_entities(results_per_page=page_size)
+        
+        # Skip to the desired page
+        skipped_pages = (page_number - 1) * page_size
+        result_page = []
+        
+        for i, entity in enumerate(entities):
+            if i < skipped_pages:
+                continue
+            result_page.append(entity)
+            if len(result_page) == page_size:
+                break
+        
+        return result_page
+    except Exception as e:
+        print(f"Error: Unable to get inventory entities. Error message: {str(e)}")
+        return None
