@@ -9,15 +9,21 @@
 	// "features": {},
 
 	// Configure tool-specific properties.
-	// "customizations": {
-	// 	// Configure properties specific to VS Code.
-	// 	"vscode": {
-	// 		"settings": {},
-	// 		"extensions": [
-	// 			"streetsidesoftware.code-spell-checker"
-	// 		]
-	// 	}
-	// },
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			"settings": {},
+			"extensions": [
+				"ms-python.python",
+				"ms-python.debugpy",
+				"ms-toolsai.jupyter",
+				"ms-toolsai.jupyter-renderers",
+				"ms-toolsai.vscode-jupyter-powertoys",
+				"github.copilot",
+				"github.copilot-chat"
+			]
+		}
+	},
 	
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [9000],
