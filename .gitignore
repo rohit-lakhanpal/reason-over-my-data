@@ -578,3 +578,5 @@ config.json
 .ai
 
 evaluation_output
+
+.DS_Store

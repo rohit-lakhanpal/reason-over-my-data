@@ -67,6 +67,18 @@ def get_search_index(attempt = "01"):
         storage_context=storage_context,
     )
 
+def generate_llama_document(document):
+    return Document(
+                text=document["md"],
+                metadata={
+                    "title": document['metadata']['title'],                 
+                    "url": document['url'],
+                    "hash": document['hash'],
+                    "lastModified": document['metadata']['source-last-modified'],
+                    "created": document['created'], 
+                }    
+            )
+
 def configure_search_and_store(document, attempt = "01"):
     try:
         # Index name to use
