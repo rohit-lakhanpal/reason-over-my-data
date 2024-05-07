@@ -23,11 +23,8 @@ from llama_index.core import (
 from llama_index.core.settings import Settings
 from llama_index.core import Document
 
-def get_index_name(attempt = "01"):
-    return "data_index_attempt_" + attempt
 
-def get_search_index(attempt = "01"):
-    index_name = get_index_name(attempt)
+def get_search_index(index_name):
     credential = AzureKeyCredential(os.getenv('AI_SEARCH_SERVICE_API_KEY'))
     index_client = SearchIndexClient(
         endpoint=os.getenv('AI_SEARCH_SERVICE_ENDPOINT'),
@@ -79,10 +76,8 @@ def generate_llama_document(document):
                 }    
             )
 
-def configure_search_and_store(document, attempt = "01"):
+def configure_search_and_store(document, index_name):
     try:
-        # Index name to use
-        index_name = get_index_name(attempt)
         credential = AzureKeyCredential(os.getenv('AI_SEARCH_SERVICE_API_KEY'))
 
         # Use index client to demonstrate creating an index
@@ -144,7 +139,6 @@ def configure_search_and_store(document, attempt = "01"):
         print(f"Error: {e}")
         return None
 
-
 def get_aoai():
     llm = AzureOpenAI(
         model=os.getenv('AOAI_LLM_MODEL'),
@@ -166,7 +160,6 @@ def get_aoai():
         'llm': llm,
         'embed_model': embed_model
     }
-
 
 def get_md5_hash(string):
     return hashlib.md5(string.encode()).hexdigest()
@@ -277,7 +270,12 @@ def fetch_document(url):
         'hash': get_md5_hash(html_content['content'])
     }
 
-def fetch_and_ingest_url_approach_001(url):
+def fetch_and_ingest_url_approach_001(url, index_name):
+    # validate index_name is not null
+    # validate index_name is not null
+    if index_name is None:
+        raise ValueError("Index name cannot be null")
+
     # step 1: fetch and convert
     document = fetch_document(url)
 
@@ -285,4 +283,4 @@ def fetch_and_ingest_url_approach_001(url):
     # None here
 
     # step 3: configure search and store
-    return configure_search_and_store(document, "001")
+    return configure_search_and_store(document, index_name)
