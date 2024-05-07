@@ -33,6 +33,9 @@
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
+    </li>  
+    <li>
+      <a href="#technologies-explored">Technologies Explored</a>
     </li>    
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#disclaimer">Disclaimer</a></li>
@@ -77,6 +80,14 @@ To get started with "Reason Over My Data," follow these steps:
    cp .env.sample .env
    ```
    Fill in the required values in the `.env` file, such as your Azure service credentials and connection details.
+
+4. **Explore Notebooks:**
+    Now that you have setup your environment, you can start exploring notebooks under the following folders:
+    ```    
+    L ./001-Build-Inventory/
+    L ./002-Fetch-And-Ingest/
+    L ./003-Build-Evaluation/
+    ```
 
 With these steps completed, you'll be all set to start using "Reason Over My Data."
 
