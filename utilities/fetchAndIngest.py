@@ -2,7 +2,6 @@ import requests
 from bs4 import BeautifulSoup
 from markdownify import markdownify as md, MarkdownConverter
 from urllib.parse import urljoin
-from datetime import datetime
 import hashlib
 from datetime import datetime
 import os
@@ -67,12 +66,14 @@ def get_search_index(index_name):
 def generate_llama_document(document):
     return Document(
                 text=document["md"],
+                doc_id=document['id'],
+                extra_info=document['url'],
                 metadata={
                     "title": document['metadata']['title'],                 
                     "url": document['url'],
                     "hash": document['hash'],
                     "lastModified": document['metadata']['source-last-modified'],
-                    "created": document['created'], 
+                    # "created": document['created'], 
                 }    
             )
 
@@ -258,6 +259,8 @@ def fetch_document(url):
 
     id = get_md5_hash(url)
 
+    #current_date = datetime.now()
+
     return {
         'id': id,        
         'url': url,
@@ -266,7 +269,7 @@ def fetch_document(url):
         'metadata': metadata,
         'links': links,
         'images': images,
-        'created': datetime.now().isoformat(),
+        # 'created': current_date.isoformat(),
         'hash': get_md5_hash(html_content['content'])
     }
 
