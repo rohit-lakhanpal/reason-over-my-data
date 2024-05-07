@@ -67,7 +67,7 @@ def generate_llama_document(document):
     return Document(
                 text=document["md"],
                 doc_id=document['id'],
-                extra_info=document['url'],
+                # extra_info=document['url'],
                 metadata={
                     "title": document['metadata']['title'],                 
                     "url": document['url'],
